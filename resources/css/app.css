@@ -1,0 +1,7 @@
+@import url('global.css');
+@import url('navigation.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
