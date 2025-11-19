@@ -42,6 +42,8 @@ class GroupController extends Controller
             $group->save();
         }
 
+        $this->join($group->id);
+
         return redirect()->route('groups.index');
     }
 
