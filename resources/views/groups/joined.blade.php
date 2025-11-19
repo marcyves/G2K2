@@ -16,9 +16,10 @@
     </x-slot>
     <section class="glass-background">
         <h2>Active Groups</h2>
-        <ul class="glass-background">
+        <ul>
             @foreach ($activeGroups as $group)
                 @if ($group->id != $userGroup->id)
+                <div class="glass-background mb-6">
                     <li class="group">
                         <div class="grade">{{ $group->name }}
                             @if ($grades->where('group_graded_id', $group->id)->count() > 0)
@@ -33,24 +34,25 @@
                                 Reset
                             </button>
                         </form>
+                                    @endif
+                                @endforeach
+                            @else
+                                </div>
+                                <a href="{{ route('groups.grade', $group->id) }}" class="button">
+                                    Grade
+                                </a>
+                            @endif
+                                </li>
+                                <ul class="mx-6 mb-2">
+                                    @php
+                                        $groupUsers = \App\Models\User::where('group_id', '=', $group->id)->get();
+                                    @endphp
+                                    @foreach ($groupUsers as $user)
+                                            <li>{{ $user->name }}</li>
+                                    @endforeach
+                                </ul>
+                    </div>
                 @endif
-            @endforeach
-        @else
-            </div>
-            <a href="{{ route('groups.grade', $group->id) }}" class="button">
-                Grade
-            </a>
-            @endif
-            </li>
-        <ul class="glass-background mx-6 mb-2">
-            @php
-                $groupUsers = \App\Models\User::where('group_id', '=', $group->id)->get();
-            @endphp
-            @foreach ($groupUsers as $user)
-                    <li>{{ $user->name }}</li>
-            @endforeach
-        </ul>
-            @endif
             @endforeach
         </ul>
     </section>
