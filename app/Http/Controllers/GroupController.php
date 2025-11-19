@@ -25,18 +25,9 @@ class GroupController extends Controller
         {
             // Get groups already graded
             $grades = Grade::where('group_grader_id', Auth::user()->group_id)->get();
-            /*
-            $grading_completed = true;
-            foreach ($activeGroups as $group)
-            {
-                if($group->id != $userGroup->id)
-                {
-                    $grading_completed = false;
-                }
-            }
-            */
-
-            return view('groups.joined', compact('groups', 'activeGroups', 'userGroup', 'grades'));
+            $users = $userGroup->getParticipants();
+ 
+            return view('groups.joined', compact('groups', 'activeGroups', 'userGroup', 'grades', 'users'));
         }
 
         return view('groups.index', compact('groups', 'activeGroups'));

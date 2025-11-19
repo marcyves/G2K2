@@ -18,4 +18,8 @@ class Group extends Model
     {
         return self::select()->where('active', true)->orderBy('name')->get();
     }
+    public  function getParticipants()
+    {
+        return User::where('group_id', $this->id)->get();
+    }
 }
