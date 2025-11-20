@@ -4,9 +4,7 @@
             {{ __('K2 Groups') }}
         </h2>
         Your group: <strong>{{ $userGroup->name }}</strong>
-        @if(Auth::user()->id == 1)
             <a href="{{ route('groups.leave', $userGroup->id) }}" class="button">Leave</a>
-        @endif
         <h3>Participants</h3>
         <ul>
             @foreach ($users as $user)
