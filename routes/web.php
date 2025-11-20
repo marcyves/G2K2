@@ -3,6 +3,7 @@
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdministrationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('/administration', AdministrationController::class);
+    
     Route::resource('/groups', GroupController::class);
     Route::post('/group/activate', [GroupController::class, 'activate'])->name('groups.activate');
     Route::get('/group/join/{id}', [GroupController::class, 'join'])->name('groups.join');
